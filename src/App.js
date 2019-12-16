@@ -9,9 +9,9 @@ import './App.css';
 class LeftBar extends React.Component {
 
   renderList() {
-    const listIcons = ['fa fa-cog', 'fa fa-home'];
+    const listIcons = ['fa fa-home', 'fa fa-calendar', 'fa fa-envelope', 'fa fa-user', 'fa fa-cog'];
     const listItems = listIcons.map((listIcons) =>
-    <li><i class={listIcons}>a</i></li>
+    <li><i class={listIcons}></i></li>
   );
     return (<ul>{listItems}</ul>);
   }
@@ -20,10 +20,11 @@ class LeftBar extends React.Component {
   render() {
     return (
         <div className="left-nav-col">
-          <div>logo placeholder</div>
+          <div><img src={logo} className="App-logo Logo-small" alt="logo" /></div>
           <div class="left-col-contents">
             {this.renderList()}
           </div>
+          <div>exit button placeholder</div>
 
         </div>
       );
