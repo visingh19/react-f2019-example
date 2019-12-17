@@ -92,6 +92,7 @@ code {
 
 .newsfeed-search-container {
 	position: relative;
+	margin-top: 20px;
 }
 
 .newsfeed-searchbox {
@@ -111,4 +112,68 @@ code {
 	position:absolute;
 	left:20px;
 	top:2px;
+}
+
+/* News Feed Two Column */
+
+.news-columns {
+	display: flex;
+	border:1px solid black;
+
+	/*children items will lie down in column order*/
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	/*must allow scrolling*/
+	overflow: hidden;
+}
+
+/*styling for a standard news item*/
+.news-item-box {
+	border-radius:10px;
+	background-color: white;
+	flex-basis:40%;
+	border:1px solid black;
+	margin:4%;
+
+	position:relative;
+}
+
+.news-item-box textarea {
+	resize:none;
+	/*border:none;*/
+
+	
+	width:90%-50px;
+	padding-left: 50px;
+	min-height: 50px;
+
+}
+
+.newspost-icon {
+	height:50px;
+	width:50px;
+
+	border-radius:20px;
+	position:absolute;
+	left:0px;
+	/*float:left;*/
+}
+
+/*clumsy.*/
+.your-status-box-options i {
+	float:left;
+	margin-left:10px;
+}
+
+.share-btn {
+	float:right;
+	border-radius:2px;
+	color:white;
+	background-color:rgb(006,088,253);
+	font-size:12px;
+	/*line-height:20px;*/
+	padding:5px;
+	margin-right: 10px
+
 }

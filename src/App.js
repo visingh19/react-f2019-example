@@ -20,12 +20,12 @@ class LeftBarNavItem extends React.Component {
 
   // binding to 'this' syntax 
   handleMouseEnter = () => {
-    console.log('mouse enter, this is:', this, this.props.icon, this.props.link);
+    // console.log('mouse enter, this is:', this, this.props.icon, this.props.link);
     this.setState({selected: true});
   }
 
   handleMouseLeave = () => {
-    console.log('mouse leave, this is:', this, this.props.icon, this.props.link)
+    // console.log('mouse leave, this is:', this, this.props.icon, this.props.link)
     this.setState({selected: false});
   }
 
@@ -93,8 +93,8 @@ class NewsSearchBar extends React.Component {
 
   // maintain one source of truth for react
   handleChange = (event) => {
-    console.log(this.state.searchText)
-    console.log(event.target.value)
+    // console.log(this.state.searchText)
+    // console.log(event.target.value)
     this.setState({searchText: event.target.value})
     event.preventDefault();
   }
@@ -115,6 +115,100 @@ class NewsSearchBar extends React.Component {
 }
 
 
+class NewsColumnContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    // state init here
+  }
+
+  // we're going to fill the columns here using flexbox.
+  // We also need to include one "post your current status / thoughts" default panel.
+
+  // is it one column with wrapping or two separate columns that we split posts into...?
+
+  // all component items go into news-columns for posts
+  render () {
+    return ( 
+      <div className="news-columns">
+
+      <YourStatusBox />
+      <YourStatusBox />
+      <YourStatusBox />
+      <YourStatusBox />
+      <YourStatusBox />
+
+
+      </div>
+    );
+  }
+
+}
+
+class YourStatusBox extends React.Component {
+  constructor(props) {
+    super(props);
+    // state init here
+    this.state = {
+      statusText: ''
+    }
+  }
+
+  // maintain one source of truth for react, bind?
+  updateStatusText = (event) => {
+    // console.log(this.state.statusText)
+    // console.log(event.target.value)
+    this.setState({statusText: event.target.value})
+    event.preventDefault();
+  }
+
+
+
+  //this is a special box for posting your thoughts specifically
+
+  render () {
+    return ( 
+      <div className="your-status-box news-item-box">
+        <Icon iconSrc={logo} />
+        <textarea className="your-status-textarea" type="text" placeholder="What are you thinking?"
+          value={this.state.statusText} onChange={this.updateStatusText}/>
+        <div className="your-status-box-options">
+          <i className="fa fa-camera"></i>
+          <i className="fa fa-video-camera"></i>
+          <i className="fa fa-plus"></i>
+
+          <span className="share-btn">Share ></span>
+        </div>
+
+      </div> 
+    );
+  }
+
+}
+
+// returns an icon floated left based on the img src provided as a prop
+function Icon(props) {
+  return (
+    <img src={props.iconSrc} className="newspost-icon" alt="icon" />
+  );
+}
+
+//the only 'state' here is # of likes/comments/your comment.
+class NewsInfoBox extends React.Component {
+  constructor(props) {
+    super(props);
+    // state init here
+  }
+
+  // this is a generic info box template
+  // contains the following data:
+  //  poster name, poster profile, main content (video, picture, etc)
+  //  'how far has it spread' bar (# of likes, comments, share button)
+  //  'your comment box', some other comments - at least 5 distinct components?
+
+  render () {
+    return ( <div>hello</div> );
+  }
+}
 
 
 
@@ -129,14 +223,14 @@ class NewsFeed extends React.Component {
 
   render () {
     return (
-     
+
       <div className="news-feed">
-      // Search Box
-      <NewsSearchBar />
 
-      // Two Column Scroll
+        <NewsSearchBar />
 
-      test</div> 
+        <NewsColumnContainer />
+
+      </div> 
     );
   }
 
