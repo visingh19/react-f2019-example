@@ -1,9 +1,12 @@
 import React from 'react';
+import { Grid, Image } from 'semantic-ui-react'
 import logo from './logo.svg';
 import './App.css';
 
 
 
+
+///////// LEFT BAR COMPONENTS //////////////
 
 class LeftBarNavItem extends React.Component {
   //construction for assigning any initial state
@@ -75,7 +78,7 @@ class LeftBar extends React.Component {
 
 
 
-
+///////////// MAIN FEED COMPONENTS (double column scroll bar) //////////
 
 
 
@@ -103,13 +106,12 @@ class App extends React.Component {
 
   //render function
   render () {
+
     return (
 
       <div className="App">
 
       <LeftBar />
-
-
 
 
         <header className="App-header">
