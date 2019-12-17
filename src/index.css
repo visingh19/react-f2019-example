@@ -20,7 +20,7 @@ code {
 /*left bar*/
 
 .left-nav-col {
-	/*padding:30px;*/
+	/*no padding allowed or flex-basis gets funky*/
 	flex-basis:15%;
 
 	background-color:rgb(006,088,253);
@@ -78,4 +78,37 @@ code {
 .left-nav-col li.selected {
 	background-color: white;
 	color: rgb(006,088,253);
+}
+
+
+/*Middle News Feed.*/
+
+.news-feed {
+	flex-basis:65%;
+	background-color:rgb(240, 240, 240);
+}
+
+/*News Feed Search Box*/
+
+.newsfeed-search-container {
+	position: relative;
+}
+
+.newsfeed-searchbox {
+	lineheight:25px;
+	font-size:20px;
+	width:90%;
+
+	border-radius:15px;
+	border:0px solid transparent;
+	margin:0px 10px 0px 10px;
+
+	padding-left: 30px;
+}
+
+/*can I do this better / more responsively? look later*/
+.newsfeed-search-container .fa-search {
+	position:absolute;
+	left:20px;
+	top:2px;
 }
