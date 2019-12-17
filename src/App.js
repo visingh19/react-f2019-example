@@ -5,24 +5,56 @@ import './App.css';
 
 
 
+class LeftBarNavItem extends React.Component {
+  //construction for assigning any initial state
+  constructor(props) {
+    super(props);
+    //selected only works for hovering for now :C
+    this.state = {
+      selected: false
+    }
+  }
 
-class LeftBar extends React.Component {
-
-  
   handleMouseEnter = () => {
-    console.log('mouse enter, this is:', this);
+    console.log('mouse enter, this is:', this, this.props.icon);
+    this.setState({selected: true});
   }
 
   handleMouseLeave = () => {
-    console.log('mouse leave, this is:', this)
+    console.log('mouse leave, this is:', this, this.props.icon)
+    this.setState({selected: false});
   }
+
+
+  render() {
+    var listClass = ""
+    if (this.state.selected) {
+      listClass = 'selected'
+    }
+    else { //not selected
+      listClass = '';
+    }
+
+    return (
+      <li className={listClass} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+        <i className={this.props.icon}></i>
+      </li>
+    );
+  }
+
+
+
+
+}
+
+
+class LeftBar extends React.Component {
+
 
   renderList() {
     const listIcons = ['fa fa-home', 'fa fa-calendar', 'fa fa-envelope', 'fa fa-user', 'fa fa-cog'];
     const listItems = listIcons.map((listIcons, index) =>
-      <li key={index} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-        <i class={listIcons}></i>
-        </li>
+      <LeftBarNavItem key={index} icon={listIcons} />
     );
     return (<ul>{listItems}</ul>);
     }
@@ -32,10 +64,10 @@ class LeftBar extends React.Component {
     return (
         <div className="left-nav-col">
           <div><img src={logo} className="App-logo Logo-small" alt="logo" /></div>
-          <div class="left-col-contents">
+          <div className="left-col-contents">
             {this.renderList()}
           </div>
-          <div class="left-nav-signout"><i class="fa fa-sign-out"></i></div>
+          <div className="left-nav-signout"><i className="fa fa-sign-out"></i></div>
         </div>
       );
   }
@@ -86,7 +118,7 @@ class App extends React.Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
 
-            Hello!!!! <i class="fa fa-cog"></i> something
+            Hello!!!! <i className="fa fa-cog"></i> something
           </p>
           <a
             className="App-link"
