@@ -15,13 +15,14 @@ class LeftBarNavItem extends React.Component {
     }
   }
 
+  // binding to 'this' syntax 
   handleMouseEnter = () => {
-    console.log('mouse enter, this is:', this, this.props.icon);
+    console.log('mouse enter, this is:', this, this.props.icon, this.props.link);
     this.setState({selected: true});
   }
 
   handleMouseLeave = () => {
-    console.log('mouse leave, this is:', this, this.props.icon)
+    console.log('mouse leave, this is:', this, this.props.icon, this.props.link)
     this.setState({selected: false});
   }
 
@@ -37,13 +38,10 @@ class LeftBarNavItem extends React.Component {
 
     return (
       <li className={listClass} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-        <i className={this.props.icon}></i>
+        <a href={this.props.link}><i className={this.props.icon}></i></a>
       </li>
     );
   }
-
-
-
 
 }
 
@@ -53,8 +51,9 @@ class LeftBar extends React.Component {
 
   renderList() {
     const listIcons = ['fa fa-home', 'fa fa-calendar', 'fa fa-envelope', 'fa fa-user', 'fa fa-cog'];
+    const listLinks = ['/home', '/calendar', '/inbox', '/profile', '/settings']
     const listItems = listIcons.map((listIcons, index) =>
-      <LeftBarNavItem key={index} icon={listIcons} />
+      <LeftBarNavItem key={index} icon={listIcons} link={listLinks[index]} />
     );
     return (<ul>{listItems}</ul>);
     }

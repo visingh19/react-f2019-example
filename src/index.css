@@ -48,6 +48,8 @@ code {
 	border:5px solid transparent;
 	border-radius:15px;
 	background-color:rgb(055,123,253);
+
+	cursor:pointer;
 }
 
 .left-nav-signout {
@@ -61,6 +63,16 @@ code {
 
 	border:5px solid rgb(055,123,253);
 	border-radius:15px;
+}
+
+/*link color overrrides*/
+.left-nav-col li a {
+	color:white;
+}
+
+.left-nav-col li.selected a {
+	/*link color override*/
+	color: rgb(006,088,253); 
 }
 
 .left-nav-col li.selected {
