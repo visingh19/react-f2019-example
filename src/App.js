@@ -8,13 +8,24 @@ import './App.css';
 
 class LeftBar extends React.Component {
 
+  
+  handleMouseEnter = () => {
+    console.log('mouse enter, this is:', this);
+  }
+
+  handleMouseLeave = () => {
+    console.log('mouse leave, this is:', this)
+  }
+
   renderList() {
     const listIcons = ['fa fa-home', 'fa fa-calendar', 'fa fa-envelope', 'fa fa-user', 'fa fa-cog'];
-    const listItems = listIcons.map((listIcons) =>
-    <li><i class={listIcons}></i></li>
-  );
+    const listItems = listIcons.map((listIcons, index) =>
+      <li key={index} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+        <i class={listIcons}></i>
+        </li>
+    );
     return (<ul>{listItems}</ul>);
-  }
+    }
 
 
   render() {
@@ -24,8 +35,7 @@ class LeftBar extends React.Component {
           <div class="left-col-contents">
             {this.renderList()}
           </div>
-          <div>exit button placeholder</div>
-
+          <div class="left-nav-signout"><i class="fa fa-sign-out"></i></div>
         </div>
       );
   }
