@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Image } from 'semantic-ui-react'
 import logo from './logo.svg';
 import './App.css';
+import placeholder from './placeholder_100.png';
 
 
 
@@ -119,6 +120,10 @@ class NewsColumnContainer extends React.Component {
   constructor(props) {
     super(props);
     // state init here
+    // have we clicked on something to open up the new side bar.
+    this.state = {
+      expanded: false
+    }
   }
 
   // we're going to fill the columns here using flexbox.
@@ -132,10 +137,10 @@ class NewsColumnContainer extends React.Component {
       <div className="news-columns">
 
       <YourStatusBox />
-      <YourStatusBox />
-      <YourStatusBox />
-      <YourStatusBox />
-      <YourStatusBox />
+      <NewsInfoBox />
+      <NewsInfoBox />
+      <NewsInfoBox />
+      <NewsInfoBox />
 
 
       </div>
@@ -168,7 +173,7 @@ class YourStatusBox extends React.Component {
   render () {
     return ( 
       <div className="your-status-box news-item-box">
-        <Icon iconSrc={logo} />
+        <YourIcon iconSrc={logo} />
         <textarea className="your-status-textarea" type="text" placeholder="What are you thinking?"
           value={this.state.statusText} onChange={this.updateStatusText}/>
         <div className="your-status-box-options">
@@ -186,31 +191,105 @@ class YourStatusBox extends React.Component {
 }
 
 // returns an icon floated left based on the img src provided as a prop
+function YourIcon(props) {
+  return (
+    <img src={props.iconSrc} className="your-newspost-icon" alt="icon" />
+  );
+}
+
 function Icon(props) {
   return (
     <img src={props.iconSrc} className="newspost-icon" alt="icon" />
   );
 }
 
+
+
+
+
+////////////////////////////////////////////////////////////////
+////////////// BASIC POST INFO BOX /////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
+
 //the only 'state' here is # of likes/comments/your comment.
+
+// props: iconSrc, name, time
+//  media to be loaded?
+//  # of likes, comments
+//  comments to be loaded
 class NewsInfoBox extends React.Component {
   constructor(props) {
     super(props);
     // state init here
+
   }
 
   // this is a generic info box template
   // contains the following data:
-  //  poster name, poster profile, main content (video, picture, etc)
+  //  poster name, poster profile, main content (video, picture, etc) - done
+  //  main content click needs to trigger sidebar expansion (TODO)
   //  'how far has it spread' bar (# of likes, comments, share button)
   //  'your comment box', some other comments - at least 5 distinct components?
 
   render () {
-    return ( <div>hello</div> );
+    return ( 
+      <div className="news-item-box">
+      <PosterInfo iconSrc={placeholder} name="Potato" time="7 minutes ago"/>
+      <div>I am main content.</div>
+      <PostSocials hearts={17} comments={5}/>
+      </div> 
+    );
   }
 }
 
+// Takes a iconSrc, name, and time prop.
+function PosterInfo (props) {
+  return (
+      <div className="poster-info">
+        <Icon iconSrc={props.iconSrc}/>
+        <div className="poster-label">
+          <span className="name-label">{props.name}</span>
+          <br/>
+          <span className="time-label">{props.time}</span>
+        </div>
+        <i className="fa fa-ellipsis-v poster-options"></i>
+      </div>
+    );
+}
 
+// takes # of likes, comments, and comments to be loaded as input.
+// likes & comments will be modified, so they're state.
+class PostSocials extends React.Component {
+  constructor(props) {
+    super(props);
+    // state init here
+
+    this.state = {
+      liked: false,
+      commented: false,
+      hearts: this.props.hearts,
+      comments: this.props.comments
+    }
+
+  }
+
+  render () {
+    return (
+      <div> All Socials.
+
+
+        <div className="network-spread-info">
+          <span className="network-likes"><i className="fa fa-heart-o"></i> {this.state.hearts}</span>
+          <span className="network-comments"><i className="fa fa-comment-o"></i> {this.state.comments}</span>
+
+          <span className="network-share">Share <i className="fa fa-share"></i></span>
+        </div>
+      </div>
+    );
+  }
+}
 
 
 //NewsFeed contains a search bar and two column feed that can be clicked on.

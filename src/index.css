@@ -134,7 +134,8 @@ code {
 	background-color: white;
 	flex-basis:40%;
 	border:1px solid black;
-	margin:4%;
+	margin:3%;
+	padding:1%;
 
 	position:relative;
 }
@@ -150,7 +151,7 @@ code {
 
 }
 
-.newspost-icon {
+.your-newspost-icon {
 	height:50px;
 	width:50px;
 
@@ -158,6 +159,13 @@ code {
 	position:absolute;
 	left:0px;
 	/*float:left;*/
+}
+
+.newspost-icon {
+	width:50px;
+
+	border-radius:20px;
+	display:inline-block;
 }
 
 /*clumsy.*/
@@ -175,5 +183,54 @@ code {
 	/*line-height:20px;*/
 	padding:5px;
 	margin-right: 10px
+}
 
+.poster-info {
+	min-height:50px;
+	text-align: left;
+	display:block;
+}
+
+.poster-label {
+	display:inline-block;
+}
+
+.name-label {
+	font-weight: 700;
+	font-size:14px;
+}
+
+.time-label {
+	font-weight: 100;
+	font-size:11px;
+	color:gray;
+}
+
+.poster-options {
+	float:right;
+	margin-right:5px;
+	line-height: 50px;
+	font-size:30px;
+	color:gray;
+
+}
+
+/*Post Socials*/
+
+.network-spread-info {
+	text-align: left;
+}
+
+.network-spread-info span {
+	cursor:pointer;
+}
+
+.network-likes, .network-comments {
+	font-weight: bolder;
+	margin-right:8%;
+}
+
+.network-share {
+	font-weight: bolder;
+	float:right;
 }
