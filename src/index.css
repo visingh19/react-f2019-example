@@ -234,3 +234,11 @@ code {
 	font-weight: bolder;
 	float:right;
 }
+
+.red {
+	color:red;
+}
+
+.lightblue {
+	color: lightblue;
+}

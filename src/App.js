@@ -275,14 +275,41 @@ class PostSocials extends React.Component {
 
   }
 
+  // ES6 binding syntax. fxn = () => {}
+  updateHeart = (event) => {
+    if (this.state.liked == false) {
+      this.setState({hearts: this.state.hearts + 1});
+    }
+    else {
+      this.setState({hearts: this.state.hearts - 1});
+    }
+    
+    this.setState({liked: !this.state.liked});
+  }
+
+  updateComment = (event) => {
+    if (this.state.commented == false) {
+      this.setState({comments: this.state.comments + 1});
+    }
+    else {
+      this.setState({comments: this.state.comments - 1});
+    }
+    
+    this.setState({commented: !this.state.commented});
+  }
+
   render () {
+    const isLiked = this.state.liked;
+    const isCommented = this.state.commented;
+
     return (
+      
       <div> All Socials.
 
 
         <div className="network-spread-info">
-          <span className="network-likes"><i className="fa fa-heart-o"></i> {this.state.hearts}</span>
-          <span className="network-comments"><i className="fa fa-comment-o"></i> {this.state.comments}</span>
+          <span onClick={this.updateHeart} className="network-likes"><i className={isLiked ? 'fa fa-heart red':'fa fa-heart-o'}></i> {this.state.hearts}</span>
+          <span onClick={this.updateComment} className="network-comments"><i className={isCommented ? "fa fa-comment lightblue" : "fa fa-comment-o"}></i> {this.state.comments}</span>
 
           <span className="network-share">Share <i className="fa fa-share"></i></span>
         </div>
