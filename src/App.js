@@ -132,14 +132,15 @@ class NewsColumnContainer extends React.Component {
   // is it one column with wrapping or two separate columns that we split posts into...?
 
   // all component items go into news-columns for posts
+  // a 'commentable' property turns on or off the ability to see comments on a post.
   render () {
     return ( 
       <div className="news-columns">
 
       <YourStatusBox />
       <NewsInfoBox />
-      <NewsInfoBox />
-      <NewsInfoBox />
+      <NewsInfoBox commentable={true} />
+      <NewsInfoBox commentable={false}/>
       <NewsInfoBox />
 
 
@@ -226,6 +227,10 @@ class NewsInfoBox extends React.Component {
 
   }
 
+  static defaultProps = {
+    commentable: true,
+  }
+
   // this is a generic info box template
   // contains the following data:
   //  poster name, poster profile, main content (video, picture, etc) - done
@@ -240,7 +245,7 @@ class NewsInfoBox extends React.Component {
       <div>I am main content.</div>
       <PostSocials hearts={17} comments={5}/>
 
-      <SocialComments />
+      {(this.props.commentable == true) && <SocialComments />}
       </div> 
     );
   }
@@ -311,8 +316,7 @@ class PostSocials extends React.Component {
 
     return (
       
-      <div> All Socials.
-
+      <div>
 
         <div className="network-spread-info">
           <span onClick={this.updateHeart} className="network-likes"><i className={isLiked ? 'fa fa-heart red':'fa fa-heart-o'}></i> {this.state.hearts}</span>
