@@ -137,11 +137,20 @@ class NewsColumnContainer extends React.Component {
     return ( 
       <div className="news-columns">
 
-      <YourStatusBox />
-      <NewsInfoBox />
-      <NewsInfoBox commentable={true} />
-      <NewsInfoBox commentable={false}/>
-      <NewsInfoBox />
+      <div className="column">
+        <YourStatusBox />
+        <NewsInfoBox />
+        <NewsInfoBox commentable={true} />
+      </div>
+      <div className="column">
+        <NewsInfoBox commentable={false}/>
+        <NewsInfoBox />
+        <NewsInfoBox commentable={false} />
+        <NewsInfoBox />
+      </div>
+
+      
+      
 
 
       </div>
@@ -173,7 +182,7 @@ class YourStatusBox extends React.Component {
 
   render () {
     return ( 
-      <div className="your-status-box news-item-box">
+      <div className="your-status-box news-item-box clearfix">
         <YourIcon iconSrc={logo} />
         <textarea className="your-status-textarea" type="text" placeholder="What are you thinking?"
           value={this.state.statusText} onChange={this.updateStatusText}/>
@@ -183,6 +192,7 @@ class YourStatusBox extends React.Component {
           <i className="fa fa-plus"></i>
 
           <span className="share-btn">Share ></span>
+
         </div>
 
       </div> 
@@ -220,6 +230,7 @@ function Icon(props) {
 //  media to be loaded?
 //  # of likes, comments
 //  comments to be loaded
+// contains a commentable prop that lets you show/hide comments & a default prop to match.
 class NewsInfoBox extends React.Component {
   constructor(props) {
     super(props);
@@ -251,6 +262,7 @@ class NewsInfoBox extends React.Component {
   }
 }
 
+// Information about the author of a post.
 // Takes a iconSrc, name, and time prop.
 function PosterInfo (props) {
   return (
@@ -267,6 +279,7 @@ function PosterInfo (props) {
 }
 
 
+// Information about the social network spread of a post.
 // takes # of likes, comments, and comments to be loaded as input.
 // likes & comments will be modified, so they're state.
 class PostSocials extends React.Component {
@@ -338,12 +351,33 @@ function SocialComments (props) {
   return (
 
     <div>
+
+      <MyComment />
+
       <OneComment iconSrc={placeholder} name="Billy Jean" time="3 mins ago" text="Really cool stuff, Potato. Really cool." />
       <OneComment iconSrc={logo} name="Rudolph React" time="dawn of time" text="You'd be so much cooler if you learned react.js >B) Join the react side." />
     </div>
 
     );
 }
+
+// contains space for a comment with an emoji and share icon.
+class MyComment extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div className="post-commentbox">
+        <i className="fa fa-smile-o"></i> <i className="fa fa-paper-plane"></i>
+        <textarea className="post-commentbox-text" placeholder="Write a comment..." rows="1"></textarea>
+
+      </div>
+    );
+  }
+}
+
 
 // one comment, with icon, name, time, actual comment, like & comment buttons (for sub-comments?)
 // todo: add 'small' prop for Icon to make 'small' icon option.
