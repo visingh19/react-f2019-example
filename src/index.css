@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+.red {
+	color:red;
+}
+
+.lightblue {
+	color: lightblue;
+}
+
+/*MAIN APP*/
 
 .App {
 	display:flex;
@@ -96,7 +105,7 @@ code {
 }
 
 .newsfeed-searchbox {
-	lineheight:25px;
+	line-height:25px;
 	font-size:20px;
 	width:90%;
 
@@ -145,9 +154,11 @@ code {
 	/*border:none;*/
 
 	
-	width:90%-50px;
+	width: calc(90% - 40px);
 	padding-left: 50px;
 	min-height: 50px;
+
+	height: calc(100% - 40px);
 
 }
 
@@ -157,7 +168,7 @@ code {
 
 	border-radius:20px;
 	position:absolute;
-	left:0px;
+	/*left:0px;*/
 	/*float:left;*/
 }
 
@@ -166,6 +177,10 @@ code {
 
 	border-radius:20px;
 	display:inline-block;
+}
+
+.small {
+	width:30px;
 }
 
 /*clumsy.*/
@@ -235,10 +250,41 @@ code {
 	float:right;
 }
 
-.red {
-	color:red;
+
+
+.social-comment {
+	min-height:50px;
+	text-align: left;
+	display:block;
+
+	margin-bottom:15px;
 }
 
-.lightblue {
-	color: lightblue;
+.social-comment .newspost-icon {
+	width:30px;
+	float:left;
+}
+
+.social-comment-label {
+	/*stil clumsy*/
+	/*width: calc(100% - 30px);*/
+	width: 100%;
+}
+
+.social-comment-label, .social-comment-label span {
+	display:inline-block;
+}
+
+.social-comment .name-label {
+	float:left;
+	margin-left: 4px;
+}
+
+.social-comment .time-label {
+	float:right;
+}
+
+.social-comment-text {
+	color:gray;
+	font-weight: lighter;
 }

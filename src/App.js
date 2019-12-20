@@ -231,7 +231,7 @@ class NewsInfoBox extends React.Component {
   //  poster name, poster profile, main content (video, picture, etc) - done
   //  main content click needs to trigger sidebar expansion (TODO)
   //  'how far has it spread' bar (# of likes, comments, share button)
-  //  'your comment box', some other comments - at least 5 distinct components?
+  //  'your comment box', some other comments - at least 5 distinct components? (sometimes this does not show up)
 
   render () {
     return ( 
@@ -239,6 +239,8 @@ class NewsInfoBox extends React.Component {
       <PosterInfo iconSrc={placeholder} name="Potato" time="7 minutes ago"/>
       <div>I am main content.</div>
       <PostSocials hearts={17} comments={5}/>
+
+      <SocialComments />
       </div> 
     );
   }
@@ -259,6 +261,7 @@ function PosterInfo (props) {
     );
 }
 
+
 // takes # of likes, comments, and comments to be loaded as input.
 // likes & comments will be modified, so they're state.
 class PostSocials extends React.Component {
@@ -274,6 +277,8 @@ class PostSocials extends React.Component {
     }
 
   }
+
+  // STATE UPDATERS
 
   // ES6 binding syntax. fxn = () => {}
   updateHeart = (event) => {
@@ -298,6 +303,8 @@ class PostSocials extends React.Component {
     this.setState({commented: !this.state.commented});
   }
 
+  // RENDER FUNCTIONS
+
   render () {
     const isLiked = this.state.liked;
     const isCommented = this.state.commented;
@@ -313,6 +320,75 @@ class PostSocials extends React.Component {
 
           <span className="network-share">Share <i className="fa fa-share"></i></span>
         </div>
+      </div>
+    );
+  }
+}
+
+
+// Bug: this does not update # of comments when you comment.
+// We need to convert to a class & lift state up.
+// Sometimes this does not appear at all!
+// Takes a set of comments + a space to write your own comment
+function SocialComments (props) {
+  return (
+
+    <div>
+      <OneComment iconSrc={placeholder} name="Billy Jean" time="3 mins ago" text="Really cool stuff, Potato. Really cool." />
+      <OneComment iconSrc={logo} name="Rudolph React" time="dawn of time" text="You'd be so much cooler if you learned react.js >B) Join the react side." />
+    </div>
+
+    );
+}
+
+// one comment, with icon, name, time, actual comment, like & comment buttons (for sub-comments?)
+// todo: add 'small' prop for Icon to make 'small' icon option.
+// needs to be a class b/c of comment & like states
+
+class OneComment extends React.Component {
+  constructor(props) {
+    super(props);
+    //state init for liked/commented. maybe I should make a like/comment its own component?
+    // lots of code re-use with Post Socials
+
+    this.state = {
+      liked: false,
+      commented: false,
+    }
+  }
+
+  // STATE UPDATERS
+
+  // ES6 binding syntax. fxn = () => {}
+  updateHeart = (event) => {
+    this.setState({liked: !this.state.liked});
+  }
+
+  updateComment = (event) => {
+    
+    this.setState({commented: !this.state.commented});
+  }
+
+  render () {
+    const isLiked = this.state.liked;
+    const isCommented = this.state.commented;
+
+    return (
+      <div className="social-comment">
+        
+        <div className="social-comment-label">
+          <Icon iconSrc={this.props.iconSrc} />
+          <span className="name-label">{this.props.name}</span>
+          <span className="time-label">{this.props.time}</span> 
+        </div>
+        <div className="social-comment-content">
+          <div className="social-comment-text">{this.props.text}</div>
+          <div className="social-comment-buttons">
+            <span onClick={this.updateHeart} className="network-likes"><i className={isLiked ? 'fa fa-heart red':'fa fa-heart-o'}></i></span>
+          <span onClick={this.updateComment} className="network-comments"><i className={isCommented ? "fa fa-comment lightblue" : "fa fa-comment-o"}></i></span>
+          </div>
+        </div>
+
       </div>
     );
   }
