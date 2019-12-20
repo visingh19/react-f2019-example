@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Image } from 'semantic-ui-react'
+// import { Grid, Image } from 'semantic-ui-react'
 import logo from './logo.svg';
 import './App.css';
 import placeholder from './placeholder_100.png';
@@ -253,10 +253,10 @@ class NewsInfoBox extends React.Component {
     return ( 
       <div className="news-item-box">
       <PosterInfo iconSrc={placeholder} name="Potato" time="7 minutes ago"/>
-      <div>I am main content.</div>
+      <PostMainContent />
       <PostSocials hearts={17} comments={5}/>
 
-      {(this.props.commentable == true) && <SocialComments />}
+      {(this.props.commentable === true) && <SocialComments />}
       </div> 
     );
   }
@@ -277,6 +277,36 @@ function PosterInfo (props) {
       </div>
     );
 }
+
+
+// this is the main content of a post. Photos, video, link, with comments or headers above.
+// on click, we need to expand a new page to the side TODO.
+// we can feed in the image content as a prop by adding it from above.
+class PostMainContent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  loadContentDisplay = (event) => {
+    console.log("Loading some post display.");
+  }
+
+  // display content and allow user to click to go to another interesting page.
+  render() {
+    return (
+      <div className="main-content">
+        <h4>Content Type.</h4>
+        <span className="main-content-text">I am going to talk about my post.
+          Below is a container for photo/video/link content.</span>
+        <div onClick={this.loadContentDisplay} className="main-content-container"><img src={logo} className="App-logo" alt="logo" /></div>
+
+      </div>
+      
+    );
+  }
+
+}
+
 
 
 // Information about the social network spread of a post.
@@ -300,7 +330,7 @@ class PostSocials extends React.Component {
 
   // ES6 binding syntax. fxn = () => {}
   updateHeart = (event) => {
-    if (this.state.liked == false) {
+    if (this.state.liked === false) {
       this.setState({hearts: this.state.hearts + 1});
     }
     else {
@@ -311,7 +341,7 @@ class PostSocials extends React.Component {
   }
 
   updateComment = (event) => {
-    if (this.state.commented == false) {
+    if (this.state.commented === false) {
       this.setState({comments: this.state.comments + 1});
     }
     else {
@@ -380,7 +410,7 @@ class MyComment extends React.Component {
 
 
 // one comment, with icon, name, time, actual comment, like & comment buttons (for sub-comments?)
-// todo: add 'small' prop for Icon to make 'small' icon option.
+// we can maybe add 'small' prop for Icon to make 'small' icon option.
 // needs to be a class b/c of comment & like states
 
 class OneComment extends React.Component {

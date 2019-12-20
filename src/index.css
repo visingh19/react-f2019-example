@@ -101,7 +101,19 @@ code {
 .news-feed {
 	flex-basis:65%;
 	background-color:rgb(240, 240, 240);
+
+	max-height: 100vh;
+	overflow: scroll;
+	-ms-overflow-style: none;
 }
+
+/*this + -ms-overflow work for IE, Edge, Chrome, Safari, Opera*/
+/*Firefox removed support for hiding scrollbars.*/
+.news-feed::-webkit-scrollbar {
+	display:none;
+}
+
+
 
 /*News Feed Search Box*/
 
@@ -133,7 +145,7 @@ code {
 
 .news-columns {
 	display: flex;
-	border:1px solid black;
+	/*border:1px solid black;*/
 
 	/*children items will lie down in column order*/
 	flex-direction: row;
@@ -144,7 +156,7 @@ code {
 }
 
 .news-columns .column {
-	flex-basis: 50%;
+	width: 50%;
 }
 
 /*styling for a standard news item*/
@@ -152,7 +164,7 @@ code {
 	border-radius:10px;
 	background-color: white;
 	/*flex-basis:40%;*/
-	border:1px solid black;
+	/*border:1px solid black;*/
 	margin:3%;
 	padding:3%;
 
@@ -304,6 +316,7 @@ code {
 
 .post-commentbox {
 	position:relative;
+	margin-top:15px;
 }
 
 .post-commentbox-text {
@@ -328,4 +341,30 @@ code {
 	right:2%;
 	top:25%;
 	color:rgb(56, 123, 253);
+}
+
+/*Main content on post.*/
+
+.main-content {
+	text-align: left;
+	border-radius: 12px;
+	background:rgb(250, 250, 250);
+}
+
+.main-content-container {
+	overflow: hidden;
+	max-width: 100%;
+	cursor: pointer;
+}
+
+/*first child scale down max width.*/
+.main-content-container > * {
+	max-width: 100%
+}
+
+.main-content-text {
+	color:gray;
+	font-weight: lighter;
+	font-family: Arial;
+	font-size: 12px;
 }
