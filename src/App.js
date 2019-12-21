@@ -3,6 +3,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import placeholder from './placeholder_100.png';
+import ad_sky from './ad_sky.png';
 
 
 
@@ -488,6 +489,114 @@ class NewsFeed extends React.Component {
 }
 
 
+/////////////////////////////////////////////////
+////////////// RIGHT SIDE BAR  //////////////////
+/////////////////////////////////////////////////
+
+
+// Right side bar. Contains the 4 following:
+// Notifications and your icon.
+// An add space.
+// Who to follow ( containing 3 people with a 'follow'/'add friend' button) + see more.
+// Your current friends (containing 3 people, all with check marks.)
+class RightBar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // passing innerHTML via adText might be bad. Can't use linebreaks.
+  render() {
+    return (
+      <div className="right-bar">
+        <ProfileNotifications icon={placeholder} notifs={12}/>
+        <RightBarAd adImageSrc={ad_sky} adLink="#fakeadlink" adText="I am ad text. Click the banner." />
+
+        <FollowSuggestions />
+      </div>
+    );
+  }
+
+}
+
+function ProfileNotifications (props) {
+  return (
+    <div className="profile-notifications">
+      <div className="profile-alerts">{props.notifs}</div>
+      <Icon iconSrc={props.icon}/>
+    </div>
+  );
+}
+
+function RightBarAd (props) {
+  // ONLY for setting a dynamic background image for the ad.
+  const divStyle = {
+    backgroundImage: 'url(' + props.adImageSrc + ')'
+  }
+  return (
+    <a className="right-bar-ad-link" href={props.adLink}><div className="right-bar-ad" style={divStyle}>
+      {props.adText}
+    </div></a>
+  );
+}
+
+class FollowSuggestions extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  // followed should be false, but just in case. maybe I should not include & set a default in the class.
+  render () {
+    return (
+      <div class="follow-suggestions">
+        <h4>Who to Follow</h4>
+        // people go here.
+        <OneFollowSuggestion iconSrc={logo} name="Cammy Fletching" location="Mountain View, CA" followed={false} />
+        <OneFollowSuggestion iconSrc={logo} name="Johny Tomato" location="Berkeley, CA" followed={false} />
+        <OneFollowSuggestion iconSrc={placeholder} name="A Friendly WebDev" location="Santa Clara, CA" followed={false} />
+
+        <a href="#moresuggestions" className="follow-suggestions-expand">SEE MORE ></a>
+      </div>
+    );
+  }
+
+}
+
+
+class OneFollowSuggestion extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      followDiv: ""
+    }
+    if (this.props.followed) {
+      this.state.followDiv = <div className="follow-box followed"><i className="fa fa-check"></i></div>;
+    }
+    else {
+      this.state.followDiv = <div onClick={this.followUser} className="follow-box"><i className="fa fa-user"></i></div>;
+    }
+  }
+  
+  followUser = () => {
+    console.log("now followed");
+    this.setState({followDiv: <div className="follow-box followed"><i className="fa fa-check"></i></div>}); 
+  }
+
+  render () {
+    return (
+      <div class="one-follow-suggestion">
+        <Icon iconSrc={this.props.iconSrc}/>
+          <div className="poster-label">
+            <span className="name-label">{this.props.name}</span>
+            <br/>
+            <span className="place-label">{this.props.location}</span>
+          </div>
+          {this.state.followDiv}
+      </div>
+    );
+  }
+}
+
 
 ////////// APP MAIN CONTAINER ///////////////
 
@@ -516,7 +625,7 @@ class App extends React.Component {
 
         <NewsFeed />
 
-
+        <RightBar />
       
       </div>
     );

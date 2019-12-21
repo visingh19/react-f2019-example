@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:rgb(240, 240, 240);
 }
 
 code {
@@ -99,7 +100,7 @@ code {
 /*Middle News Feed.*/
 
 .news-feed {
-	flex-basis:65%;
+	flex-basis:60%;
 	background-color:rgb(240, 240, 240);
 
 	max-height: 100vh;
@@ -229,6 +230,7 @@ code {
 }
 
 .poster-label {
+	margin-left:5px;
 	display:inline-block;
 }
 
@@ -237,7 +239,7 @@ code {
 	font-size:14px;
 }
 
-.time-label {
+.time-label, .place-label {
 	font-weight: 100;
 	font-size:11px;
 	color:gray;
@@ -367,4 +369,102 @@ code {
 	font-weight: lighter;
 	font-family: Arial;
 	font-size: 12px;
+}
+
+/*Main Right Sidebar.*/
+
+
+/*do not put padding here, it messes with flex-basis.*/
+.right-bar {
+	/*news-feed is 60%, left-nav-col is 15%*/
+	flex-basis: calc(25% - 40px);
+	background-color:rgb(32, 31, 35);
+
+	border-radius: 25px;
+	color: rgb(245, 245, 245);
+
+	padding-left: 20px;
+	padding-right: 20px;
+
+}
+
+/*notifs & right bar ad space*/
+
+.profile-notifications {
+	margin-top:20px;
+	text-align: right;
+}
+
+.profile-notifications > * {
+	display:inline-block;
+	/*without this, defaults to baseline.*/
+	vertical-align: top;
+	margin-left:10px;
+}
+
+.profile-notifications .newspost-icon {
+	width: 30px;
+	border-radius: 10px;
+}
+
+.profile-alerts {
+	text-align: center;
+	/*vertically center text*/
+	line-height: 30px; 
+	height:30px;
+
+
+	border-radius: 10px;
+	background-color:rgb(121, 208, 242);
+	width:30px;
+	
+}
+
+.right-bar-ad {
+	/*100% - 2*20 margin - 2*10 padding*/
+	width:calc(100% - 20px);
+	border-radius: 20px;
+	height:15%;
+	padding:10px;
+
+
+	margin-top:20px;
+}
+
+.right-bar-ad-link {
+	text-decoration: none;
+	color: rgb(245, 245, 245);
+}
+
+/*Follow Suggestions*/
+
+.follow-suggestions {
+	text-align: left;
+}
+
+.follow-box {
+	float:right;
+	border-radius: 3px;
+	background-color:rgb(6, 88, 253);
+	height:20px;
+	width:20px;
+	font-size:12px;
+	line-height: 20px;
+	text-align: center;
+}
+
+.follow-box.followed {
+	background-color:rgb(75, 75, 75);
+}
+
+.follow-suggestions-expand {
+	margin-top:30px;
+	text-decoration: none;
+	color:gray;
+
+	line-height: 12px;
+	font-size: 12px;
+	letter-spacing: 1px;
+	font-weight: bolder;
+	display:block;
 }
