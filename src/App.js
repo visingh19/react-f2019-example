@@ -296,7 +296,7 @@ class PostMainContent extends React.Component {
   render() {
     return (
       <div className="main-content">
-        <h4>Content Type.</h4>
+        <h4>Photos</h4>
         <span className="main-content-text">I am going to talk about my post.
           Below is a container for photo/video/link content.</span>
         <div onClick={this.loadContentDisplay} className="main-content-container"><img src={logo} className="App-logo" alt="logo" /></div>
@@ -512,6 +512,7 @@ class RightBar extends React.Component {
         <RightBarAd adImageSrc={ad_sky} adLink="#fakeadlink" adText="I am ad text. Click the banner." />
 
         <FollowSuggestions />
+        <FriendList />
       </div>
     );
   }
@@ -521,7 +522,7 @@ class RightBar extends React.Component {
 function ProfileNotifications (props) {
   return (
     <div className="profile-notifications">
-      <div className="profile-alerts">{props.notifs}</div>
+      <div className="profile-alerts"><a href="#notifs">{props.notifs}</a></div>
       <Icon iconSrc={props.icon}/>
     </div>
   );
@@ -539,6 +540,68 @@ function RightBarAd (props) {
   );
 }
 
+class FriendList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div class="friend-list">
+        <h4>Friends</h4>
+        <OneFriend iconSrc={logo} name="Billy Bench" followed={true} />
+        <OneFriend iconSrc={logo} name="Alice Apple" followed={true} />
+        <OneFriend iconSrc={logo} name="Camille Crenshaw" followed={true} />
+      </div>
+    );
+  }
+}
+
+// opposite of onefollowsuggestion, you should be able to unfriend someone.
+class OneFriend extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      followDiv: "",
+      followed: this.props.followed
+    }
+    if (this.props.followed) {
+      this.state.followDiv = <div onClick={this.toggleFollow} className="follow-box followed"><i className="fa fa-check"></i></div>;
+    }
+    else {
+      this.state.followDiv = <div onClick={this.toggleFollow} className="follow-box"><i className="fa fa-user"></i></div>;
+    }
+  }
+  
+  toggleFollow = () => {
+    console.log("toggling follow");
+    if (this.state.followed) {
+      // turn 'friendship' off
+      this.setState({followDiv: <div onClick={this.toggleFollow} className="follow-box"><i className="fa fa-user"></i></div>});
+      this.setState({followed: false});
+    }
+    else {
+      // turn friendship on
+      this.setState({followDiv: <div onClick={this.toggleFollow} className="follow-box followed"><i className="fa fa-check"></i></div>}); 
+      this.setState({followed: true});
+    }
+    
+  }
+
+  render () {
+    return (
+      <div class="one-follow-suggestion">
+        <Icon iconSrc={this.props.iconSrc}/>
+          <div className="poster-label">
+            <span className="name-label">{this.props.name}</span>
+          </div>
+          {this.state.followDiv}
+      </div>
+    );
+  }
+}
+
+
 class FollowSuggestions extends React.Component {
   constructor(props) {
     super(props);
@@ -550,7 +613,6 @@ class FollowSuggestions extends React.Component {
     return (
       <div class="follow-suggestions">
         <h4>Who to Follow</h4>
-        // people go here.
         <OneFollowSuggestion iconSrc={logo} name="Cammy Fletching" location="Mountain View, CA" followed={false} />
         <OneFollowSuggestion iconSrc={logo} name="Johny Tomato" location="Berkeley, CA" followed={false} />
         <OneFollowSuggestion iconSrc={placeholder} name="A Friendly WebDev" location="Santa Clara, CA" followed={false} />

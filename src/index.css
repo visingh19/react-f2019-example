@@ -402,6 +402,7 @@ code {
 	margin-left:10px;
 }
 
+
 .profile-notifications .newspost-icon {
 	width: 30px;
 	border-radius: 10px;
@@ -418,6 +419,11 @@ code {
 	background-color:rgb(121, 208, 242);
 	width:30px;
 	
+}
+
+.profile-alerts a {
+	text-decoration: none;
+	color: rgb(245, 245, 245);
 }
 
 .right-bar-ad {
@@ -438,8 +444,12 @@ code {
 
 /*Follow Suggestions*/
 
-.follow-suggestions {
+.follow-suggestions, .friend-list {
 	text-align: left;
+}
+
+.one-follow-suggestion {
+	margin-top:5px;
 }
 
 .follow-box {
@@ -451,6 +461,7 @@ code {
 	font-size:12px;
 	line-height: 20px;
 	text-align: center;
+	margin-top:10px;
 }
 
 .follow-box.followed {
@@ -467,4 +478,19 @@ code {
 	letter-spacing: 1px;
 	font-weight: bolder;
 	display:block;
+}
+
+.friend-list .newspost-icon, .follow-suggestions .newspost-icon {
+	width:30px;
+	height:30px;
+	border-radius:10px;
+}
+
+.friend-list .poster-label {
+	vertical-align: top;
+	line-height: 30px;
+}
+
+.friend-list .name-label {
+	/*vertical-align: center;*/
 }
