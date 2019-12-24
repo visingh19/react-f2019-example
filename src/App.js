@@ -668,16 +668,22 @@ class OneFollowSuggestion extends React.Component {
 
 //The media viewer contains a back button and author on the top row
 // and a navigation carousel or media player in the main space.
+// receives fxn setStateExpanded={this.props.setStateExpanded}
 class MediaViewer extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  exitViewer = (event) => {
+    console.log("Exiting carousel viewer.");
+    this.props.setStateExpanded(false);
   }
 
   render () {
     return (
         <div className="media-viewer-container">
           <div className="media-viewer-nav clearfix">
-            <div className="media-viewer-back-btn">&lt;&nbsp;&nbsp;&nbsp;Back</div>
+            <div onClick={this.exitViewer} className="media-viewer-back-btn">&lt;&nbsp;&nbsp;&nbsp;Back</div>
             <div className="media-viewer-profile">
               <span className="name-label">{this.props.name}</span>
               <Icon iconSrc={this.props.iconSrc} />
@@ -780,7 +786,7 @@ class App extends React.Component {
 
         {(this.state.expanded === false) && <RightBar />}
 
-        {(this.state.expanded === true) && <MediaViewer iconSrc={logo} name="Rudolph React"/>}
+        {(this.state.expanded === true) && <MediaViewer iconSrc={logo} name="Rudolph React" setStateExpanded={this.setStateExpanded}/>}
 
         {(this.state.expanded ===true) && <MediaViewerComments comment_count={125} />}
       
