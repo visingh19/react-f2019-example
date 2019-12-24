@@ -673,7 +673,7 @@ class MediaViewer extends React.Component {
   render () {
     return (
         <div className="media-viewer-container">
-          <div className="media-viewer-nav">
+          <div className="media-viewer-nav clearfix">
             <div className="media-viewer-back-btn">&lt;&nbsp;&nbsp;&nbsp;Back</div>
             <div className="media-viewer-profile">
               <span className="name-label">{this.props.name}</span>
@@ -681,10 +681,29 @@ class MediaViewer extends React.Component {
             </div>
           </div>
 
+          < MediaViewerContent imageSrc={ad_sky}/>
+
 
         </div>
       );
   }
+}
+
+class MediaViewerContent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+        <div className="media-viewer-carousel">
+          <div class="left-carousel-btn">&lt;</div>
+          <div class="right-carousel-btn">></div>
+          <img src={this.props.imageSrc} className="carousel-image" alt="carousel" />
+        </div>
+      );
+  }
+
 }
 
 
