@@ -659,6 +659,66 @@ class OneFollowSuggestion extends React.Component {
   }
 }
 
+/////////////////////////////////////////////
+///////// EXPANDED APP MEDIA VIEWER /////////
+/////////////////////////////////////////////
+
+//The media viewer contains a back button and author on the top row
+// and a navigation carousel or media player in the main space.
+class MediaViewer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+        <div className="media-viewer-container">
+          <div className="media-viewer-nav">
+            <div className="media-viewer-back-btn">&lt;&nbsp;&nbsp;&nbsp;Back</div>
+            <div className="media-viewer-profile">
+              <span className="name-label">{this.props.name}</span>
+              <Icon iconSrc={this.props.iconSrc} />
+            </div>
+          </div>
+
+
+        </div>
+      );
+  }
+}
+
+
+/////////////////////////////////////////////
+////////// MEDIA VIEWER COMMENTS  ///////////
+/////////////////////////////////////////////
+
+
+class MediaViewerComments extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // contains a profile alerts section, a whole bunch of comments (as main page), 
+  //    and a space to write your own
+  render () {
+    return (
+        <div className="right-bar media-comments">
+          <ProfileNotifications icon={placeholder} notifs={12} />
+
+          <h3>Comments ({this.props.comment_count})</h3>
+
+          <OneComment iconSrc={placeholder} name="Viktor Vue" time="5 minutes ago" text="This is cool." />
+          <OneComment iconSrc={logo} name="Rudolph React" time="12 hours ago" text="I think I did a really good job helping out with this. It wouldn't have worked if not for me!" />
+          <OneComment iconSrc={placeholder} name="Jenny JSX" time="2 years ago" text="I helped out a lot too. Quite a bit actually." />
+          <OneComment iconSrc={placeholder} name="Harriet HTML" time="3 years ago" text="Well, I was the backbone of everything, you know?" />
+
+          <MyComment />
+
+        </div>
+      );
+  }
+
+}
 
 ////////// APP MAIN CONTAINER ///////////////
 
@@ -671,7 +731,7 @@ class App extends React.Component {
     super(props);
     //expanded is 'have we zoomed in on one post?'
     this.state = {
-      expanded: 'false'
+      expanded: true
     }
   }
 
@@ -685,9 +745,13 @@ class App extends React.Component {
 
         <LeftBar />
 
-        <NewsFeed />
+        {(this.state.expanded === false) && <NewsFeed />}
 
-        <RightBar />
+        {(this.state.expanded === false) && <RightBar />}
+
+        {(this.state.expanded === true) && <MediaViewer iconSrc={logo} name="Rudolph React"/>}
+
+        {(this.state.expanded ===true) && <MediaViewerComments comment_count={125} />}
       
       </div>
     );

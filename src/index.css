@@ -41,6 +41,9 @@ code {
 
 	background-color:rgb(006,088,253);
 
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+
 }
 
 .left-nav-col ul {
@@ -75,7 +78,7 @@ code {
 	font-size:50px;
 	color:white;
 
-	margin:100px auto 10px auto;
+	margin:100px auto 30px auto;
 
 	border:5px solid rgb(055,123,253);
 	border-radius:15px;
@@ -286,6 +289,7 @@ code {
 
 .social-comment .newspost-icon {
 	width:30px;
+	height: 30px;
 	float:left;
 }
 
@@ -334,13 +338,13 @@ code {
 
 .post-commentbox .fa-smile-o {
 	position: absolute;
-	right:10%;
+	right:12%;
 	top:25%;
 }
 
 .post-commentbox .fa-paper-plane {
 	position: absolute;
-	right:2%;
+	right:3%;
 	top:25%;
 	color:rgb(56, 123, 253);
 }
@@ -385,6 +389,8 @@ code {
 
 	padding-left: 20px;
 	padding-right: 20px;
+
+	position:relative;
 
 }
 
@@ -493,4 +499,67 @@ code {
 
 .friend-list .name-label {
 	/*vertical-align: center;*/
+}
+
+
+/*MEDIA VIEWER*/
+
+/*same width as */
+
+.media-viewer-container {
+	/*or 60%.*/
+	flex-basis: 60%;
+	background-color:rgb(32, 31, 35);
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	/*padding-right:25%;*/
+
+	color: rgb(200, 200, 200);
+}
+
+.media-viewer-nav {
+	margin-top:30px;
+	margin-left: 10%;
+	margin-right:10%;
+}
+
+.media-viewer-nav div {
+	display:inline-block;
+}
+
+.media-viewer-back-btn {
+	float:left;
+	/*width:15%;*/
+	padding-left:15px;
+	padding-right:15px;
+	height:40px;
+	border-radius: 10px;
+	background-color:rgb(77, 77, 77);
+
+	font-size: 12px;
+	line-height: 40px;
+}
+
+.media-viewer-profile {
+	float:right;
+}
+
+.media-viewer-profile .name-label {
+	font-weight: lighter;
+	line-height: 40px;
+	vertical-align: top;
+}
+
+/*MEDIA VIEWER COMMENTS*/
+
+.right-bar.media-comments {
+	background-color:white;
+	color:black;
+	text-align: left;
+}
+
+.right-bar.media-comments .post-commentbox {
+	position:absolute;
+	bottom:15px;
+	width: calc(100% - 40px);
 }
