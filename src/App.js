@@ -116,15 +116,15 @@ class NewsSearchBar extends React.Component {
 
 }
 
-
+// is passed the 'setStateExpanded' fxn as a property
 class NewsColumnContainer extends React.Component {
   constructor(props) {
     super(props);
     // state init here
     // have we clicked on something to open up the new side bar.
-    this.state = {
-      expanded: false
-    }
+    // this.state = {
+    //   expanded: false
+    // }
   }
 
   // we're going to fill the columns here using flexbox.
@@ -140,14 +140,14 @@ class NewsColumnContainer extends React.Component {
 
       <div className="column">
         <YourStatusBox />
-        <NewsInfoBox />
-        <NewsInfoBox commentable={true} />
+        <NewsInfoBox setStateExpanded={this.props.setStateExpanded} />
+        <NewsInfoBox setStateExpanded={this.props.setStateExpanded} commentable={true} />
       </div>
       <div className="column">
-        <NewsInfoBox commentable={false}/>
-        <NewsInfoBox />
-        <NewsInfoBox commentable={false} />
-        <NewsInfoBox />
+        <NewsInfoBox setStateExpanded={this.props.setStateExpanded} commentable={false}/>
+        <NewsInfoBox setStateExpanded={this.props.setStateExpanded}/>
+        <NewsInfoBox setStateExpanded={this.props.setStateExpanded} commentable={false} />
+        <NewsInfoBox setStateExpanded={this.props.setStateExpanded} />
       </div>
 
       
@@ -232,6 +232,7 @@ function Icon(props) {
 //  # of likes, comments
 //  comments to be loaded
 // contains a commentable prop that lets you show/hide comments & a default prop to match.
+// gets a 'setStateExpanded' fxn as a prop as setStateExpanded={this.props.setStateExpanded}
 class NewsInfoBox extends React.Component {
   constructor(props) {
     super(props);
@@ -254,7 +255,7 @@ class NewsInfoBox extends React.Component {
     return ( 
       <div className="news-item-box">
       <PosterInfo iconSrc={placeholder} name="Potato" time="7 minutes ago"/>
-      <PostMainContent />
+      <PostMainContent setStateExpanded={this.props.setStateExpanded} />
       <PostSocials hearts={17} comments={5}/>
 
       {(this.props.commentable === true) && <SocialComments />}
@@ -283,6 +284,7 @@ function PosterInfo (props) {
 // this is the main content of a post. Photos, video, link, with comments or headers above.
 // on click, we need to expand a new page to the side TODO.
 // we can feed in the image content as a prop by adding it from above.
+// receives fxn 'setStateExpanded(bool)' as prop via setStateExpanded={this.props.setStateExpanded}
 class PostMainContent extends React.Component {
   constructor(props) {
     super(props);
@@ -290,6 +292,7 @@ class PostMainContent extends React.Component {
 
   loadContentDisplay = (event) => {
     console.log("Loading some post display.");
+    this.props.setStateExpanded(true);
   }
 
   // display content and allow user to click to go to another interesting page.
@@ -479,7 +482,7 @@ class NewsFeed extends React.Component {
 
         <NewsSearchBar />
 
-        <NewsColumnContainer />
+        <NewsColumnContainer setStateExpanded={this.props.setStateExpanded} />
 
       </div> 
     );
@@ -750,9 +753,18 @@ class App extends React.Component {
     super(props);
     //expanded is 'have we zoomed in on one post?'
     this.state = {
-      expanded: true
+      expanded: false
     }
+
+    this.setStateExpanded = this.setStateExpanded.bind(this);
   }
+
+  // set to true or false
+  setStateExpanded(value) {
+    this.setState({expanded: value});
+  }
+
+
 
 
   //render function
@@ -764,7 +776,7 @@ class App extends React.Component {
 
         <LeftBar />
 
-        {(this.state.expanded === false) && <NewsFeed />}
+        {(this.state.expanded === false) && <NewsFeed setStateExpanded={this.setStateExpanded} />}
 
         {(this.state.expanded === false) && <RightBar />}
 
