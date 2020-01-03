@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It attempts to mimic https://dribbble.com/shots/8970517-Social-Dashboards-UI-Kit-I and uses HTML, CSS, and React.js, along with Font Awesome 4 for iconography.
 
 ## Available Scripts
 
